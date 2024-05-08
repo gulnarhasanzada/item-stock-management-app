@@ -3,7 +3,7 @@ import React from 'react'
 
 const AuthCard = ({children}) => {
   return (
-    <Box className="w-full align-items-center p-5 bg-white my-auto">
+    <Box className="w-full flex flex-col align-items-center px-5 py-14 bg-white my-auto">
         {children}
     </Box>
   )

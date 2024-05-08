@@ -10,7 +10,7 @@ const AuthLayout = ({children}) => {
         <div className='h-auto xs:w-full lg:w-1/2'>
             <img src="/auth.svg" alt="Auth" className=''/>
         </div>
-        <div className='p-6'>
+        <div className='h-auto xs:w-full lg:w-1/2'>
             {children}
         </div>
       </div>
