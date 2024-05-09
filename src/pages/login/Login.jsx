@@ -3,7 +3,7 @@ import { Formik, Form, Field } from 'formik'
 import * as yup from 'yup'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-//import login from authSlice //
+import { login } from '../../store/authSlice'
 import { useState } from 'react'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
@@ -12,6 +12,9 @@ import AuthCard from '../../components/common/AuthCard';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const initialValues={
     email: '',
     password: ''
@@ -33,9 +36,10 @@ const Login = () => {
   })
 
   const handleSubmit = (values, actions) => {
-    // actions.setSubmitting(false)
-    // dispatch(login(values, navigate))
-    // actions.resetForm()
+    actions.setSubmitting(false)
+    console.log(values)
+    dispatch(login(values, navigate))
+    actions.resetForm()
   }
 
   return (
