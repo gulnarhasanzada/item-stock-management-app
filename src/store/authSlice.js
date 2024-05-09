@@ -83,4 +83,50 @@ export const login = (userInfo, navigate) =>{
     }
 }
 
+export const logout = (navigate)=>{
+    return async (dispatch)=>{
+        try {
+            const token = atob(localStorage.getItem('token'))
+            const res = await axios.post(`${url}/account/auth/logout/`,{
+                headers:{
+                    Authorization: `Token ${token}`
+                }
+            })
+
+            if(res.status === 200){
+                dispatch(authSlice.actions.auth({token: false, currentUser: false}))
+                localStorage.clear();
+                toast.success("Successfully logged out!")
+                navigate("/")
+            }
+        } catch (error) {
+            toast.error(error.message);
+        }
+    }
+}
+
+export const changePassword = (newPassword) => {
+    return async (dispatch) =>{
+        try {
+            const token = localStorage.getItem('token');
+            const res = await axios.post(`${url}/account/auth/password/change/`,{
+                method: 'POST',
+                headers: {
+                    Authorization: token,
+                    'Content-type': 'application/json'
+                },
+                data: {
+                    new_password1: newPassword,
+                    new_password2: newPassword,
+                }
+            });
+            if(res.status === 200){
+                toast.success('Password changed successfully!')
+            }
+        } catch (error) {
+            toast.error(error.message);
+        }
+    }
+}
+
 export default authSlice.reducer;

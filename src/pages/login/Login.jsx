@@ -27,11 +27,6 @@ const Login = () => {
       .required('Email is required!'),
     password: yup
       .string()
-      .min(8, 'Password must be a minimum of 8 characters')
-      .max(12, 'Password must be a maximum of 12 characters')
-      .matches(/\d+/, 'Password needs at least 1 number')
-      .matches(/[a-z]+/, 'Password needs at least 1 lowercase letter')
-      .matches(/[A-Z]+/, 'Password needs at least 1 uppercase letter')
       .required('Password is required'),
   })
 
