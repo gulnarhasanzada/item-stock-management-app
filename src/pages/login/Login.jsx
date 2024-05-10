@@ -32,7 +32,6 @@ const Login = () => {
 
   const handleSubmit = (values, actions) => {
     actions.setSubmitting(false)
-    console.log(values)
     dispatch(login(values, navigate))
     actions.resetForm()
   }
