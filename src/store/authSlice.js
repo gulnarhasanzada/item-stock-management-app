@@ -7,11 +7,12 @@ const url = import.meta.env.VITE_BACKEND_URL
 const authSlice = createSlice({
     name: 'auth',
     initialState: {
-        currentUser: localStorage.getItem('username') || false,
-        token: localStorage.getItem('token') && atob(localStorage.getItem('token')),
-        first_name: '',
-        last_name: '',
-        email: ''
+        currentUser: localStorage.getItem('username') || '',
+        token: localStorage.getItem('token') || '',
+        first_name: localStorage.getItem('first_name') || '',
+        last_name: localStorage.getItem('last_name') || '',
+        email: localStorage.getItem('email') || '',
+        admin: localStorage.getItem('admin') === 'true',
     },
     reducers: {
         auth(state, action) {
@@ -20,33 +21,33 @@ const authSlice = createSlice({
             state.first_name = action.payload.first_name
             state.last_name = action.payload.last_name
             state.email = action.payload.email
+            state.admin = action.payload.is_superuser
           },
     }
 })
 
 export const register = (userInfo, navigate) =>{
     return async (dispatch) =>{
-        try {
-            
+        try {  
             const res = await axios.post(`${url}/account/register/`, {...userInfo, password2:userInfo.password});
-            if(!res.data.token) throw new Error('Something went wrong!');
-            console.log(res)
+            if(!res.data.user.token) throw new Error('Something went wrong!');
 
             const payload = {
                 token: res.data.key,
-                currentUser: res.data.username,
-                first_name: res.data.first_name,
-                last_name: res.data.last_name,
-                email: res.data.email
+                username: res.data.user.username,
+                first_name: res.data.user.first_name,
+                last_name: res.data.user.last_name,
+                email: res.data.user.email,
+                admin: res.data.user.is_superuser
             }
 
             dispatch(authSlice.actions.auth(payload));
-            localStorage.setItem('username', res.data.username)
+            localStorage.setItem('username', res.data.user.username)
             localStorage.setItem('token', res.data.key)
-            localStorage.setItem('admin', res.data.is_superuser)
-            localStorage.setItem('first_name', res.data.first_name)
-            localStorage.setItem('last_name', res.data.last_name)
-            localStorage.setItem('email', res.data.email)
+            localStorage.setItem('admin', res.data.user.is_superuser)
+            localStorage.setItem('first_name', res.data.user.first_name)
+            localStorage.setItem('last_name', res.data.user.last_name)
+            localStorage.setItem('email', res.data.user.email)
             toast.success('Successfully registered!')
             navigate('/stock/dashboard')
 
@@ -64,17 +65,21 @@ export const login = (userInfo, navigate) =>{
             
             const payload = {
                 token: res.data.key,
-                currentUser: res.data.username
+                username: res.data.user.username,
+                first_name: res.data.user.first_name,
+                last_name: res.data.user.last_name,
+                email: res.data.user.email,
+                admin: res.data.user.is_superuser
             }
 
             dispatch(authSlice.actions.auth(payload))
 
-            localStorage.setItem('username', res.data.username)
+            localStorage.setItem('username', res.data.user.username)
             localStorage.setItem('token', res.data.key)
-            localStorage.setItem('admin', res.data.is_superuser)
-            localStorage.setItem('first_name', res.data.first_name)
-            localStorage.setItem('last_name', res.data.last_name)
-            localStorage.setItem('email', res.data.email)
+            localStorage.setItem('admin', res.data.user.is_superuser)
+            localStorage.setItem('first_name', res.data.user.first_name)
+            localStorage.setItem('last_name', res.data.user.last_name)
+            localStorage.setItem('email', res.data.user.email)
             toast.success('Successfully logged in!')
             navigate('/stock/dashboard')
         } catch (error) {
@@ -83,18 +88,20 @@ export const login = (userInfo, navigate) =>{
     }
 }
 
-export const logout = (navigate)=>{
-    return async (dispatch)=>{
+export const logout = (navigate)=>{ 
+    return async(dispatch)=>{
         try {
-            const token = atob(localStorage.getItem('token'))
-            const res = await axios.post(`${url}/account/auth/logout/`,{
-                headers:{
-                    Authorization: `Token ${token}`
-                }
-            })
-
+            const res = await axios.post(`${url}/account/auth/logout/`)
             if(res.status === 200){
-                dispatch(authSlice.actions.auth({token: false, currentUser: false}))
+                const payload = {
+                    token: '',
+                    username: '',
+                    first_name: '',
+                    last_name: '',
+                    email: '',
+                    admin: false
+                }
+                dispatch(authSlice.actions.auth(payload))
                 localStorage.clear();
                 toast.success("Successfully logged out!")
                 navigate("/")

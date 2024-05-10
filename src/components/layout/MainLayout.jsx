@@ -14,8 +14,9 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import {useDispatch} from 'react-redux'
 import { uiActions } from '../../store/uiSlice';
 import { useSelector } from 'react-redux';
-
 import Nav from '../nav/Nav';
+import ProfileMenu from '../profile/ProfileMenu';
+import Button from '@mui/material/Button';
 
 const drawerWidth = 240;
 
@@ -87,6 +88,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 export default function MainLayout({children}) {
   const theme = useTheme();
   const dispatch = useDispatch();
+
   const { toggleMenu } = uiActions;
   const sidebarOpen = useSelector(state => state.ui.sidebarOpen);
 
@@ -114,6 +116,7 @@ export default function MainLayout({children}) {
           <Typography variant="h6" noWrap component="div">
           Item Stock App
           </Typography>
+          <ProfileMenu/>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={sidebarOpen}>
