@@ -53,7 +53,7 @@ const ProfileMenu = () => {
           </div>
         </Stack>
         <Divider/>
-        <MenuItem onClick={handleClose} sx={{pr:10, fontSize: '0.9rem', mt:1}}>
+        <MenuItem onClick={()=>navigate("/stock/profile")} sx={{pr:10, fontSize: '0.9rem', mt:1}}>
             <ListItemIcon>
                 <PersonIcon fontSize='small'/>
             </ListItemIcon>

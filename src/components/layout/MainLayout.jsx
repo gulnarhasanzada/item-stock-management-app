@@ -17,6 +17,7 @@ import { useSelector } from 'react-redux';
 import Nav from '../nav/Nav';
 import ProfileMenu from '../profile/ProfileMenu';
 import Button from '@mui/material/Button';
+import { Outlet } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -85,7 +86,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-export default function MainLayout({children}) {
+export default function MainLayout() {
   const theme = useTheme();
   const dispatch = useDispatch();
 
@@ -128,9 +129,9 @@ export default function MainLayout({children}) {
         <Divider />
         <Nav/>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1, p: 3, mt:4 }}>
         <DrawerHeader />
-        {children}
+        <Outlet/>
       </Box>
     </Box>
   );

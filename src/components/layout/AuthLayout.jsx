@@ -1,6 +1,7 @@
 import React from 'react'
+import { Outlet } from 'react-router-dom'
 
-const AuthLayout = ({children}) => {
+const AuthLayout = () => {
   return (
     <div className=' bg-blue-900 text-center flex flex-col min-h-screen p-5'>
       <div>
@@ -11,7 +12,7 @@ const AuthLayout = ({children}) => {
             <img src="/auth.svg" alt="Auth" className=''/>
         </div>
         <div className='h-auto xs:w-full lg:w-1/2'>
-            {children}
+            <Outlet/>
         </div>
       </div>
     </div>

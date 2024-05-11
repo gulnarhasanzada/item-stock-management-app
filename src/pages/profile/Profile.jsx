@@ -1,10 +1,11 @@
+import { Paper } from '@mui/material'
 import React from 'react'
 
 const Profile = () => {
   return (
-    <div>
-      
-    </div>
+    <Paper>
+      <img src='/assets/account.webp'/>
+    </Paper>
   )
 }
 

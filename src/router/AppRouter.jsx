@@ -4,13 +4,20 @@ import AuthLayout from '../components/layout/AuthLayout';
 import Login from '../pages/login/Login';
 import Register from '../pages/register/Register';
 import MainLayout from '../components/layout/MainLayout';
+import Profile from '../pages/profile/Profile';
+import Dashboard from '../pages/dashboard/Dashboard';
 
 const AppRouter = () => {
   return (
     <Routes>
-      <Route path="/" element={<AuthLayout><Login/></AuthLayout>} />
-      <Route path="/register" element={<AuthLayout><Register/></AuthLayout>} />
-      <Route path="/stock/dashboard" element={<MainLayout></MainLayout>} />
+      <Route path="/" element={<AuthLayout/>}>
+        <Route index element={<Login/>}/>
+        <Route path="register" element={<Register/>}/>
+      </Route>
+      <Route path="/stock" element={<MainLayout/>}>
+        <Route path="/stock/dashboard" element={<Dashboard/>}/>
+        <Route path="/stock/profile" element={<Profile/>}/>
+      </Route> 
     </Routes>
   );
 };
