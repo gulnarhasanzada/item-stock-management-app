@@ -93,7 +93,7 @@ const Login = () => {
               />
 
               <Stack justifyContent="center" alignItems="center" mt={4}>
-                <Button variant="contained" type="submit" size="large" className='!bg-orange-600 w-[80%] mb-4'>
+                <Button variant="contained" type="submit" size="large" className='!bg-red-500 w-[80%] mb-4'>
                   Login
                 </Button>
               </Stack>
@@ -107,7 +107,7 @@ const Login = () => {
           className='text-gray-800 p-4'>
           Have an account?
         </Typography>
-        <Link to="/register" className='hover:text-gray-800 text-orange-600'>Register</Link>
+        <Link to="/register" className='hover:text-gray-800 text-red-500'>Register</Link>
     </AuthCard>
   )
 }

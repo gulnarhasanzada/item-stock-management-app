@@ -100,7 +100,7 @@ export default function MainLayout() {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position="fixed" open={sidebarOpen}>
+      <AppBar position="fixed" open={sidebarOpen} className='!bg-indigo-500'>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -120,8 +120,8 @@ export default function MainLayout() {
           <ProfileMenu/>
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={sidebarOpen}>
-        <DrawerHeader>
+      <Drawer variant="permanent" open={sidebarOpen} >
+        <DrawerHeader className='!bg-indigo-500'>
           <IconButton onClick={toggleDrawer}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
