@@ -6,9 +6,12 @@ import Register from '../pages/register/Register';
 import MainLayout from '../components/layout/MainLayout';
 import Profile from '../pages/profile/Profile';
 import Dashboard from '../pages/dashboard/Dashboard';
+import { ThemeProvider } from '@mui/material';
+import { theme } from '../util/Theme';
 
 const AppRouter = () => {
   return (
+    <ThemeProvider theme={theme}>
     <Routes>
       <Route path="/" element={<AuthLayout/>}>
         <Route index element={<Login/>}/>
@@ -19,6 +22,7 @@ const AppRouter = () => {
         <Route path="/stock/profile" element={<Profile/>}/>
       </Route> 
     </Routes>
+    </ThemeProvider>
   );
 };
 
