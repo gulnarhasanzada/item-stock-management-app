@@ -10,7 +10,7 @@ import AuthCard from '../../components/common/AuthCard';
 import { Link, useNavigate } from 'react-router-dom'
 
 
-const Login = () => {
+const Register = () => {
   const [showPassword, setShowPassword] = useState(false)
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -155,4 +155,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Register

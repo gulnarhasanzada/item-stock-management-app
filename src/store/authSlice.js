@@ -116,17 +116,19 @@ export const changePassword = (newPassword) => {
     return async (dispatch) =>{
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.post(`${url}/account/auth/password/change/`,{
-                method: 'POST',
-                headers: {
-                    Authorization: token,
-                    'Content-type': 'application/json'
+            const res = await axios.post(`${url}/account/auth/password/change/`,
+                {
+                    "new_password1": newPassword,
+                    "new_password2": newPassword,
                 },
-                data: {
-                    new_password1: newPassword,
-                    new_password2: newPassword,
+                {
+                    headers: {
+                        Authorization: `Token ${token}`,
+                        'Content-type': 'application/json'
+                    },
                 }
-            });
+                
+            );
             if(res.status === 200){
                 toast.success('Password changed successfully!')
             }
