@@ -8,6 +8,7 @@ import Profile from '../pages/profile/Profile';
 import Dashboard from '../pages/dashboard/Dashboard';
 import { ThemeProvider } from '@mui/material';
 import { theme } from '../util/Theme';
+import Categories from '../pages/categories/Categories';
 
 const AppRouter = () => {
   return (
@@ -20,6 +21,7 @@ const AppRouter = () => {
       <Route path="/stock" element={<MainLayout/>}>
         <Route path="/stock/dashboard" element={<Dashboard/>}/>
         <Route path="/stock/profile" element={<Profile/>}/>
+        <Route path='/stock/categories' element={<Categories/>}/>
       </Route> 
     </Routes>
     </ThemeProvider>
