@@ -13,7 +13,6 @@ const ProfileMenu = () => {
     const [anchorEl, setAnchorEl] = useState(false);
     const dispatch = useDispatch();
     const open = Boolean(anchorEl);
-    const currentUser = useSelector(state => state.auth.currentUser);
     const isAdmin = useSelector(state => state.auth.admin);
     const first_name = useSelector(state => state.auth.first_name);
     const last_name = useSelector(state => state.auth.last_name);

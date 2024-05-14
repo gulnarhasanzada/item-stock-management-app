@@ -1,18 +1,19 @@
 import {createSlice, current} from '@reduxjs/toolkit';
 import axios from 'axios';
 import {toast} from 'react-toastify'
+import { getAuthToken, getEmail, getFirstname, getLastname, getToken, getUsername, setStorageData } from '../util/LocalStorage';
+import { handleApiError } from '../util/ErrorMessages';
 
 const url = import.meta.env.VITE_BACKEND_URL
 
 const authSlice = createSlice({
     name: 'auth',
     initialState: {
-        currentUser: localStorage.getItem('username') || '',
-        token: localStorage.getItem('token') || '',
-        first_name: localStorage.getItem('first_name') || '',
-        last_name: localStorage.getItem('last_name') || '',
-        email: localStorage.getItem('email') || '',
-        admin: localStorage.getItem('admin') === 'true',
+        currentUser: getUsername() || '',
+        token: getToken() || '',
+        first_name: getFirstname()|| '',
+        last_name: getLastname() || '',
+        email: getAdmin() === 'true',
     },
     reducers: {
         auth(state, action) {
@@ -42,17 +43,12 @@ export const register = (userInfo, navigate) =>{
             }
 
             dispatch(authSlice.actions.auth(payload));
-            localStorage.setItem('username', res.data.user.username)
-            localStorage.setItem('token', res.data.key)
-            localStorage.setItem('admin', res.data.user.is_superuser)
-            localStorage.setItem('first_name', res.data.user.first_name)
-            localStorage.setItem('last_name', res.data.user.last_name)
-            localStorage.setItem('email', res.data.user.email)
+            setStorageData(res.data)
             toast.success('Successfully registered!')
             navigate('/stock/dashboard')
 
         } catch (error) {
-            toast.error(error.message)
+            handleApiError(error)
         }
     }
 }
@@ -73,13 +69,7 @@ export const login = (userInfo, navigate) =>{
             }
 
             dispatch(authSlice.actions.auth(payload))
-
-            localStorage.setItem('username', res.data.user.username)
-            localStorage.setItem('token', res.data.key)
-            localStorage.setItem('admin', res.data.user.is_superuser)
-            localStorage.setItem('first_name', res.data.user.first_name)
-            localStorage.setItem('last_name', res.data.user.last_name)
-            localStorage.setItem('email', res.data.user.email)
+            setStorageData(res.data)
             toast.success('Successfully logged in!')
             navigate('/stock/dashboard')
         } catch (error) {
@@ -107,7 +97,7 @@ export const logout = (navigate)=>{
                 navigate("/")
             }
         } catch (error) {
-            toast.error(error.message);
+            handleApiError(error)
         }
     }
 }
@@ -115,7 +105,6 @@ export const logout = (navigate)=>{
 export const changePassword = (newPassword) => {
     return async (dispatch) =>{
         try {
-            const token = localStorage.getItem('token');
             const res = await axios.post(`${url}/account/auth/password/change/`,
                 {
                     "new_password1": newPassword,
@@ -123,7 +112,7 @@ export const changePassword = (newPassword) => {
                 },
                 {
                     headers: {
-                        Authorization: `Token ${token}`,
+                        Authorization: getAuthToken(),
                         'Content-type': 'application/json'
                     },
                 }
@@ -133,7 +122,7 @@ export const changePassword = (newPassword) => {
                 toast.success('Password changed successfully!')
             }
         } catch (error) {
-            toast.error(error.message);
+            handleApiError(error)
         }
     }
 }

@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import {handleApiError} from '../util/ErrorMessages'
+import { getAuthToken } from "../util/LocalStorage";
 
 const url = import.meta.env.VITE_BACKEND_URL;
 
@@ -31,10 +32,9 @@ const categorySlice = createSlice({
 export const getCategories = () => {
     return async (dispatch)=>{
         try {
-            const token = localStorage.getItem('token')
             const res = await axios.get(`${url}/stock/categories/`,{
                 headers: {
-                    Authorization: `Token ${token}`
+                    Authorization: getAuthToken()
                 }
             })
 
@@ -49,14 +49,13 @@ export const getCategories = () => {
 export const createCategory = (categoryName)=>{
     return async (dispatch)=>{
         try {
-            const token = localStorage.getItem('token');
             const newCategory = {
                 name: categoryName,
                 product_count: 0
             }
             const res = await axios.post(`${url}/stock/categories/`, newCategory,{
                 headers: {
-                    Authorization: `Token ${token}`
+                    Authorization: getAuthToken()
                 }
             })
             dispatch(categorySlice.actions.addCategory(res.data))
@@ -69,17 +68,16 @@ export const createCategory = (categoryName)=>{
 export const editCategory = (category)=>{
     return async (dispatch)=>{
         try {
-            const token = localStorage.getItem('token');
             const res = await axios.patch(`${url}/stock/categories/${category.id}/`,
             {
                 name: category.name
             },
             {
                 headers: {
-                    Authorization: `Token ${token}`
+                    Authorization: getAuthToken()
                 }
             })
-            dispatch(categorySlice.actions.updateCategory(category))
+            dispatch(categorySlice.actions.updateCategory(res.data))
         } catch (error) {
             handleApiError(error)
         }
@@ -89,10 +87,9 @@ export const editCategory = (category)=>{
 export const removeCategory= (id) => {
     return async (dispatch)=>{
         try {
-            const token = localStorage.getItem('token')
             const res = await axios.delete(`${url}/stock/categories/${id}/`,{
                 headers: {
-                    Authorization: `Token ${token}`
+                    Authorization: getAuthToken()
                 }
             })
 
