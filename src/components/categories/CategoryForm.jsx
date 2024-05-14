@@ -40,8 +40,8 @@ const CategoryForm = ({category, setOpen, editMode}) => {
                 label="Category"
                 name="name"
                 margin="dense"                
-                error={Boolean(errors.categoryName) && Boolean(touched.categoryName)}
-                helperText={Boolean(touched.categoryName) ? errors.categoryName : ''}
+                error={Boolean(errors.name) && Boolean(touched.name)}
+                helperText={Boolean(touched.name) ? errors.name : ''}
                 className="w-full"
                 />
                 <Stack justifyContent="center" alignItems="center" mt={4}>

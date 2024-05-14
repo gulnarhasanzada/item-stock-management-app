@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import {handleApiError} from '../util/ErrorMessages'
 import { getAuthToken } from "../util/LocalStorage";
+import { toast } from "react-toastify";
 
 const url = import.meta.env.VITE_BACKEND_URL;
 
@@ -37,9 +38,9 @@ export const getCategories = () => {
                     Authorization: getAuthToken()
                 }
             })
-
-            dispatch(categorySlice.actions.setCategories(res.data))
-            
+            if(res.status === 200){
+                dispatch(categorySlice.actions.setCategories(res.data))
+            } 
         } catch (error) {
             handleApiError(error)
         }
@@ -58,7 +59,10 @@ export const createCategory = (categoryName)=>{
                     Authorization: getAuthToken()
                 }
             })
-            dispatch(categorySlice.actions.addCategory(res.data))
+            if(res.status === 201){
+                toast.success("Category is created successfully!")
+                dispatch(categorySlice.actions.addCategory(res.data))
+            } 
         } catch (error) {
             handleApiError(error)
         }
@@ -77,7 +81,10 @@ export const editCategory = (category)=>{
                     Authorization: getAuthToken()
                 }
             })
-            dispatch(categorySlice.actions.updateCategory(res.data))
+            if(res.status === 200){
+                toast.success("Category is updated successfully!")
+                dispatch(categorySlice.actions.updateCategory(res.data))
+            }   
         } catch (error) {
             handleApiError(error)
         }
@@ -92,9 +99,10 @@ export const removeCategory= (id) => {
                     Authorization: getAuthToken()
                 }
             })
-
-            dispatch(categorySlice.actions.deleteCategory(id))
-            
+            if(res.status === 204){
+                toast.success("Category is deleted successfully!")
+                dispatch(categorySlice.actions.deleteCategory(id))
+            }
         } catch (error) {
             handleApiError(error)
         }

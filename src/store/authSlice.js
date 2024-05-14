@@ -1,7 +1,7 @@
 import {createSlice, current} from '@reduxjs/toolkit';
 import axios from 'axios';
 import {toast} from 'react-toastify'
-import { getAuthToken, getEmail, getFirstname, getLastname, getToken, getUsername, setStorageData } from '../util/LocalStorage';
+import { getAuthToken, getEmail, getFirstname, getLastname, getToken, getUsername, setStorageData , getAdmin} from '../util/LocalStorage';
 import { handleApiError } from '../util/ErrorMessages';
 
 const url = import.meta.env.VITE_BACKEND_URL
@@ -13,7 +13,8 @@ const authSlice = createSlice({
         token: getToken() || '',
         first_name: getFirstname()|| '',
         last_name: getLastname() || '',
-        email: getAdmin() === 'true',
+        admin: getAdmin() === 'true',
+        email: getEmail() || '',
     },
     reducers: {
         auth(state, action) {
