@@ -7,7 +7,7 @@ const store = configureStore({
     reducer:{
         auth: authReducer,
         ui: uiReducer,
-        categories: categoriesReducer
+        categories: categoriesReducer,
     }
 })
 
