@@ -14,7 +14,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import DialogBox from '../../components/common/Dialog';
 import { Button } from '@mui/material';
-import CategoryForm from '../../components/categories/CategoryForm';
+import CategoryForm from '../../components/forms/CategoryForm';
 
 const Categories = () => {
   const dispatch = useDispatch();
