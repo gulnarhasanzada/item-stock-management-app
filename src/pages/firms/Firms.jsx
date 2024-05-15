@@ -6,6 +6,7 @@ import { Box, Button, Stack } from '@mui/material'
 import DialogBox from '../../components/common/Dialog'
 import FirmForm from '../../components/forms/FirmForm'
 import AddIcon from '@mui/icons-material/Add';
+import { removeFirm } from '../../store/firmSlice'
 
 const Firms = () => {
   const dispatch = useDispatch();
@@ -23,13 +24,24 @@ const Firms = () => {
     setEditMode(false)
   }
 
+  const handleEditFirm= (data)=>{
+    setOpen(true);
+    setSelectedFirm(data);
+    setEditMode(true)
+  }
+
+  const handleDeleteFirm = (id)=>{
+    setEditMode(false)
+    dispatch(removeFirm(id))
+  }
+
   return (
     <Box className="p-5 mx-auto">  
-        <h3 className='text-lg font-semibold my-5'>Firms</h3>
+        <h3 className='text-lg font-semibold mb-5'>Firms</h3>
         <Button variant='contained' className='text-white !bg-indigo-500' onClick={handleAddFirm}><AddIcon/>  Add Firm</Button>
-        <Stack direction="row" flexWrap="wrap" gap={5} justifyContent="center" className='mt-5'>
+        <Stack direction="row" flexWrap="wrap" gap={5} justifyContent="space-between" className='mt-5'>
         {firms.map(firm=>(
-            <MediaCard data={firm} key={firm.id} setOpen={setOpen} setSelectedItem={setSelectedFirm} setEditMode={setEditMode}/>
+            <MediaCard data={firm} key={firm.id} handleDelete={handleDeleteFirm} handleEdit={handleEditFirm}/>
         ))}
         {open && <DialogBox open={open} setOpen={setOpen}>
                     <FirmForm firm={editMode? selectedFirm: null} setOpen={setOpen} editMode={editMode}/>
