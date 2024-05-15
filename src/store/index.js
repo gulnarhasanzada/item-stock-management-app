@@ -4,6 +4,7 @@ import categoriesReducer from './categorySlice'
 import { uiReducer } from "./uiSlice";
 import brandsReducer from "./brandSlice";
 import firmsReducer from "./firmSlice";
+import productReducer from "./productSlice";
 
 const store = configureStore({
     reducer:{
@@ -11,7 +12,8 @@ const store = configureStore({
         ui: uiReducer,
         categories: categoriesReducer,
         brands: brandsReducer,
-        firms: firmsReducer
+        firms: firmsReducer,
+        products: productReducer
     }
 })
 

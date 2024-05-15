@@ -11,6 +11,7 @@ import { theme } from '../util/Theme';
 import Categories from '../pages/categories/Categories';
 import Brands from '../pages/brands/Brands';
 import Firms from '../pages/firms/Firms';
+import Products from '../pages/products/Products';
 
 const AppRouter = () => {
   return (
@@ -26,6 +27,7 @@ const AppRouter = () => {
         <Route path='categories' element={<Categories/>}/>
         <Route path='brands' element={<Brands/>}/>
         <Route path='firms' element={<Firms/>}/>
+        <Route path='products' element={<Products/>}/>
       </Route> 
     </Routes>
     </ThemeProvider>
