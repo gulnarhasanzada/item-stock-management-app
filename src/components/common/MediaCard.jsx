@@ -6,11 +6,17 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { Stack } from '@mui/material';
 import { useState } from 'react';
 
-const MediaCard =({data, handleEdit, handleDelete})=> {
+const MediaCard =({data, handleEdit, handleDelete, setSelected, isSelected})=> {
   const [isHovered, setIsHovered] = useState(false);
-  
+
+  const onClickHandler = ()=>{
+    setSelected && setSelected(data);
+  }
   return (
-    <Card sx={{ p: 3}} className='w-full sm:w-2/5 lg:w-1/5' onMouseEnter={()=>setIsHovered(true)} onMouseLeave={()=>setIsHovered(false)}>
+    <Card sx={{ p: 3, border: isSelected ? '1px solid #9CA3B2' : 'none'}} className='w-full sm:w-2/5 lg:w-1/5'
+          onMouseEnter={()=>setIsHovered(true)} 
+          onMouseLeave={()=>setIsHovered(false)}
+          onClick={onClickHandler}>
       <Stack direction="row" justifyContent="space-between">
       <Typography gutterBottom variant="h5" component="div" className='!text-sm !font-semibold  !my-3'>
           {data.name}
