@@ -79,7 +79,7 @@ export default function Products() {
   return (
     <Box className="mx-auto">
       <Box className='h-auto w-[70vw] md:w-[85vw] xl:w-[60vw] overflow-auto mx-auto '>
-      <h3 className='text-lg font-semibold mb-5'>Brands</h3>
+      <h3 className='text-lg font-semibold mb-5'>Products</h3>
       <Button variant='contained' className='text-white !bg-indigo-500' onClick={handleAddProduct}><AddIcon/>  Add Product</Button>
       <DataGrid  
         sx={{mt:3}}

@@ -12,6 +12,7 @@ import Categories from '../pages/categories/Categories';
 import Brands from '../pages/brands/Brands';
 import Firms from '../pages/firms/Firms';
 import Products from '../pages/products/Products';
+import Sales from '../pages/sales/Sales';
 
 const AppRouter = () => {
   return (
@@ -28,6 +29,7 @@ const AppRouter = () => {
         <Route path='brands' element={<Brands/>}/>
         <Route path='firms' element={<Firms/>}/>
         <Route path='products' element={<Products/>}/>
+        <Route path='sales' element={<Sales/>}/>
       </Route> 
     </Routes>
     </ThemeProvider>

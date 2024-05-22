@@ -1,9 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
 import { handleApiError } from "../util/ErrorMessages";
 import {setKey, setLanguage, fromAddress, setLocationType} from 'react-geocode'
 
-setKey('AIzaSyD8IPCxZZMLEmwmGb02HXPb6RsdJ8EMvk8')
+setKey(import.meta.env.VITE_GEOCODE_API_KEY);
 setLanguage('en')
 setLocationType('ROOFTOP')
 
@@ -15,7 +14,6 @@ const geoSlice = createSlice({
     },
     reducers:{
         setCoordinates(state, actions){
-            console.log(actions.payload)
             state.lat = actions.payload.lat;
             state.lng = actions.payload.lng;
         }

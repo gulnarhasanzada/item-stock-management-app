@@ -6,6 +6,7 @@ import brandsReducer from "./brandSlice";
 import firmsReducer from "./firmSlice";
 import productReducer from "./productSlice";
 import geoReducer from "./geoSlice";
+import saleReducer from "./saleSlice";
 
 const store = configureStore({
     reducer:{
@@ -15,7 +16,8 @@ const store = configureStore({
         brands: brandsReducer,
         firms: firmsReducer,
         products: productReducer,
-        geo: geoReducer
+        geo: geoReducer,
+        sales: saleReducer
     }
 })
 
