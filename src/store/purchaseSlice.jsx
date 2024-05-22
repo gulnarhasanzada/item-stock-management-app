@@ -6,39 +6,39 @@ import { toast } from "react-toastify";
 
 const url = import.meta.env.VITE_BACKEND_URL;
 
-const saleSlice = createSlice({
-    name: 'sales',
+const purchaseSlice = createSlice({
+    name: 'purchases',
     initialState:{
-        sales: []
+        purchases: []
     },
     reducers:{
-        setSales(state, actions){
-            state.sales = actions.payload
+        setPurchases(state, actions){
+            state.purchases = actions.payload
         },
-        addSale(state, actions){
-            state.sales.push(actions.payload)
+        addPurchase(state, actions){
+            state.purchases.push(actions.payload)
         },
-        deleteSale(state, actions){
-            state.sales = state.sales.filter(item=>item.id !== actions.payload)
+        deletePurchase(state, actions){
+            state.purchases = state.purchases.filter(item=>item.id !== actions.payload)
         },
-        updateSale(state, actions){
-            state.sales = state.sales.map(item=>{
+        updatePurchase(state, actions){
+            state.purchases = state.purchases.map(item=>{
                 return item.id === actions.payload.id ? actions.payload : item;
             })
         },
     }
 })
 
-export const getSales = ()=>{
+export const getPurchases = ()=>{
     return async(dispatch)=>{
         try {
-            const res = await axios.get(`${url}/stock/sales/`,{
+            const res = await axios.get(`${url}/stock/purchases/`,{
                 headers: {
                     Authorization: getAuthToken()
                 }
             })
             if(res.status === 200){
-                dispatch(saleSlice.actions.setSales(res.data))
+                dispatch(purchaseSlice.actions.setPurchases(res.data))
             }  
         } catch (error) {
             handleApiError(error)
@@ -46,17 +46,17 @@ export const getSales = ()=>{
     }
 }
 
-export const createSale = (newSale)=>{
+export const createPurchase = (newPurchase)=>{
     return async (dispatch)=>{
         try { 
-            const res = await axios.post(`${url}/stock/sales/`, newSale,{
+            const res = await axios.post(`${url}/stock/purchases/`, newPurchase,{
                 headers: {
                     Authorization: getAuthToken()
                 }
             })
             if(res.status === 201){
-                toast.success("Sale is created successfully!")
-                dispatch(saleSlice.actions.addSale(res.data))
+                toast.success("Purchase is created successfully!")
+                dispatch(purchaseSlice.actions.addPurchase(res.data))
             }    
         } catch (error) {
             handleApiError(error)
@@ -64,19 +64,19 @@ export const createSale = (newSale)=>{
     }
 }
 
-export const editSale= (sale)=>{
+export const editPurchase= (purchase)=>{
     return async (dispatch)=>{
         try {
-            const res = await axios.patch(`${url}/stock/sales/${sale.id}/`,
-            sale,
+            const res = await axios.patch(`${url}/stock/purchases/${purchase.id}/`,
+            purchase,
             {
                 headers: {
                     Authorization: getAuthToken()
                 }
             })
             if(res.status === 200){
-                toast.success("Sale is updated successfully!")
-                dispatch(saleSlice.actions.updateSale(res.data))
+                toast.success("Purchase is updated successfully!")
+                dispatch(purchaseSlice.actions.updatePurchase(res.data))
             } 
         } catch (error) {
             handleApiError(error)
@@ -84,18 +84,18 @@ export const editSale= (sale)=>{
     }
 }
 
-export const removeSale= (id) => {
+export const removePurchase= (id) => {
     return async (dispatch)=>{
         try {
-            const res = await axios.delete(`${url}/stock/sales/${id}/`,{
+            const res = await axios.delete(`${url}/stock/purchases/${id}/`,{
                 headers: {
                     Authorization: getAuthToken()
                 }
             })
 
            if(res.status === 204){
-                toast.success("Sale is deleted successfully!")
-                dispatch(saleSlice.actions.deleteSale(id))
+                toast.success("Purchase is deleted successfully!")
+                dispatch(purchaseSlice.actions.deletePurchase(id))
            } 
         } catch (error) {
             handleApiError(error)
@@ -103,4 +103,4 @@ export const removeSale= (id) => {
     }
 }
 
-export default saleSlice.reducer;
+export default purchaseSlice.reducer;

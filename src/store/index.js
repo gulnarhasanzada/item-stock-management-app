@@ -7,6 +7,7 @@ import firmsReducer from "./firmSlice";
 import productReducer from "./productSlice";
 import geoReducer from "./geoSlice";
 import saleReducer from "./saleSlice";
+import purchaseReducer from "./purchaseSlice";
 
 const store = configureStore({
     reducer:{
@@ -17,7 +18,8 @@ const store = configureStore({
         firms: firmsReducer,
         products: productReducer,
         geo: geoReducer,
-        sales: saleReducer
+        sales: saleReducer,
+        purchases: purchaseReducer
     }
 })
 

@@ -13,6 +13,7 @@ import Brands from '../pages/brands/Brands';
 import Firms from '../pages/firms/Firms';
 import Products from '../pages/products/Products';
 import Sales from '../pages/sales/Sales';
+import Purchases from '../pages/purchases/Purchases';
 
 const AppRouter = () => {
   return (
@@ -30,6 +31,7 @@ const AppRouter = () => {
         <Route path='firms' element={<Firms/>}/>
         <Route path='products' element={<Products/>}/>
         <Route path='sales' element={<Sales/>}/>
+        <Route path='purchases' element={<Purchases/>}/>
       </Route> 
     </Routes>
     </ThemeProvider>
