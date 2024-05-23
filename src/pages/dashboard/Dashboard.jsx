@@ -1,10 +1,12 @@
 import React from 'react'
+import PurchasesSalesPieChart from '../../components/charts/PurchasesSalesPieChart'
+import { Stack } from '@mui/material'
 
 const Dashboard = () => {
   return (
-    <div>
-      Dashboard
-    </div>
+    <Stack direction="row">
+      <PurchasesSalesPieChart/>
+    </Stack>
   )
 }
 

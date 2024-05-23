@@ -30,9 +30,9 @@ const Nav = () => {
   return (
     <List>
       {listItems.map(item => (
-        <ListItem key={item.label} disablePadding sx={{ display: 'block' }} title={item.label}>
+        <ListItem key={item.label} disablePadding sx={{ display: 'block' }} title={item.label} onClick={()=>navigate(`${item.url}`)}>
           <ListItemButton sx={{minHeight: 48, justifyContent: open ? 'initial' : 'center', px: 2.5, }}>
-            <ListItemIcon sx={{minWidth: 0, mr: open ? 3 : 'auto', justifyContent: 'center',}} onClick={()=>navigate(`${item.url}`)}>
+            <ListItemIcon sx={{minWidth: 0, mr: open ? 3 : 'auto', justifyContent: 'center',}}>
               <item.icon/>
             </ListItemIcon>
             <ListItemText primary={item.label} sx={{ opacity: open ? 1 : 0 }} />
