@@ -15,7 +15,7 @@ const bull = (
 
 const MainCard = ({children})=>{
   return (
-    <Card sx={{ minWidth: 275 }}>
+    <Card sx={{ width: {xs: '100%', lg: '40%'}, height: '240px' }}>
       <CardContent>
             {children}
       </CardContent>
