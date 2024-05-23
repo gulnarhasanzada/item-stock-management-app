@@ -2,6 +2,7 @@ import React from 'react'
 import PurchasesSalesPieChart from '../../components/dashboard/PurchasesSalesPieChart'
 import { Stack } from '@mui/material'
 import PurchasesSalesTotal from '../../components/dashboard/PurchasesSalesTotal'
+import SalesLineChart from '../../components/dashboard/SalesLineChart'
 
 const Dashboard = () => {
   return (
@@ -11,10 +12,12 @@ const Dashboard = () => {
         lg: 'row'
       },
       gap: 4,
-      justifyContent: 'center'
+      justifyContent: 'center',
+      flexWrap:'wrap'
     }}>
       <PurchasesSalesPieChart/>
       <PurchasesSalesTotal/>
+      <SalesLineChart/>
     </Stack>
   )
 }
