@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getSales } from '../../store/saleSlice'
 import { getPurchases } from '../../store/purchaseSlice'
 import { useEffect } from 'react'
+import RecentPurchases from '../../components/dashboard/RecentPurchases'
+import RecentSales from '../../components/dashboard/RecentSales'
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -28,7 +30,15 @@ const Dashboard = () => {
         name: purchase.time_hour,
         amount: parseFloat(purchase.price_total)
     }
-})
+  })
+
+  const recentPurchases = [...purchases].sort((a, b)=>{
+    return a.id - b.id;
+  }).slice(3)
+
+  const recentSales = [...sales].sort((a, b)=>{
+    return a.id - b.id;
+  }).slice(3)
 
   useEffect(() => {
     dispatch(getSales());
@@ -47,7 +57,9 @@ const Dashboard = () => {
       <PurchasesSalesPieChart totalSales={totalSales} totalPurchases={totalPurchases}/>
       <PurchasesSalesTotal/>
       <ChartCard data={dataSales} label="Sales"/>
+      <RecentSales data={recentSales}/>
       <ChartCard data={dataPurchases} label="Purchases"/>
+      <RecentPurchases data={recentPurchases}/>
     </Stack>
   )
 }
