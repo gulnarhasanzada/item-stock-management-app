@@ -26,8 +26,8 @@ const PurchasesSalesPieChart = () => {
         series={[
             {
             data: [
-                { id: 0, value: totalPurchases, label: 'Purchases' },
-                { id: 1, value: totalSales, label: 'Sales' },
+                { id: 0, value: totalPurchases, label: 'Purchases', color:'#EF4444' },
+                { id: 1, value: totalSales, label: 'Sales', color:'#6366F1' },
             ],
             },
         ]}

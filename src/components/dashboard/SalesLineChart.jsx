@@ -20,7 +20,7 @@ const SalesLineChart = () => {
         }
     })
   return (
-    <LineChrt data={data} dataKey="amount"/>
+    <LineChrt data={data} dataKey="amount" label="Sales" color="#6366F1"/>
   )
 }
 

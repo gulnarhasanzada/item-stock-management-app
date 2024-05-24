@@ -3,6 +3,7 @@ import PurchasesSalesPieChart from '../../components/dashboard/PurchasesSalesPie
 import { Stack } from '@mui/material'
 import PurchasesSalesTotal from '../../components/dashboard/PurchasesSalesTotal'
 import SalesLineChart from '../../components/dashboard/SalesLineChart'
+import PurchasesLineChart from '../../components/dashboard/PurchasesLineChart'
 
 const Dashboard = () => {
   return (
@@ -18,6 +19,7 @@ const Dashboard = () => {
       <PurchasesSalesPieChart/>
       <PurchasesSalesTotal/>
       <SalesLineChart/>
+      <PurchasesLineChart/>
     </Stack>
   )
 }
