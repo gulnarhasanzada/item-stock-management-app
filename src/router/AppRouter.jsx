@@ -14,8 +14,11 @@ import Firms from '../pages/firms/Firms';
 import Products from '../pages/products/Products';
 import Sales from '../pages/sales/Sales';
 import Purchases from '../pages/purchases/Purchases';
+import PrivateRouter from './PrivateRouter';
+import { useSelector } from 'react-redux';
 
 const AppRouter = () => {
+  const user = useSelector(state=>state.auth.currentUser)
   return (
     <ThemeProvider theme={theme}>
     <Routes>
@@ -23,7 +26,7 @@ const AppRouter = () => {
         <Route index element={<Login/>}/>
         <Route path="register" element={<Register/>}/>
       </Route>
-      <Route path="/stock" element={<MainLayout/>}>
+      <Route path="/stock" element={<PrivateRouter user={user}><MainLayout/></PrivateRouter>}>
         <Route path="dashboard" element={<Dashboard/>}/>
         <Route path="profile" element={<Profile/>}/>
         <Route path='categories' element={<Categories/>}/>
