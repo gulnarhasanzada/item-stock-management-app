@@ -2,10 +2,38 @@ import React from 'react'
 import PurchasesSalesPieChart from '../../components/dashboard/PurchasesSalesPieChart'
 import { Stack } from '@mui/material'
 import PurchasesSalesTotal from '../../components/dashboard/PurchasesSalesTotal'
-import SalesLineChart from '../../components/dashboard/SalesLineChart'
-import PurchasesLineChart from '../../components/dashboard/PurchasesLineChart'
+import ChartCard from '../../components/common/ChartCard'
+import { useDispatch, useSelector } from 'react-redux'
+import { getSales } from '../../store/saleSlice'
+import { getPurchases } from '../../store/purchaseSlice'
+import { useEffect } from 'react'
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
+  const sales = useSelector(state => state.sales.sales);
+  const purchases = useSelector(state => state.purchases.purchases);
+
+  const totalSales = sales?.reduce((acc,sale)=>acc+parseFloat(sale.price_total), 0);
+  const totalPurchases = purchases?.reduce((acc,purchase)=>acc+parseFloat(purchase.price_total), 0);
+
+  const dataSales = sales.map((sale)=>{
+    return {
+        name: sale.time_hour,
+        amount: parseFloat(sale.price_total)
+    }
+  })
+
+  const dataPurchases = purchases.map((purchase)=>{
+    return {
+        name: purchase.time_hour,
+        amount: parseFloat(purchase.price_total)
+    }
+})
+
+  useEffect(() => {
+    dispatch(getSales());
+    dispatch(getPurchases())
+  }, [dispatch]);
   return (
     <Stack sx={{
       flexDirection: {
@@ -16,10 +44,10 @@ const Dashboard = () => {
       justifyContent: 'center',
       flexWrap:'wrap'
     }}>
-      <PurchasesSalesPieChart/>
+      <PurchasesSalesPieChart totalSales={totalSales} totalPurchases={totalPurchases}/>
       <PurchasesSalesTotal/>
-      <SalesLineChart/>
-      <PurchasesLineChart/>
+      <ChartCard data={dataSales} label="Sales"/>
+      <ChartCard data={dataPurchases} label="Purchases"/>
     </Stack>
   )
 }
